@@ -1,0 +1,18 @@
+{
+  "1": {
+    "id": "1",
+    "title": "TODO"
+  },
+  "2": {
+    "id": "2",
+    "title": "In Progress"
+  },
+  "3": {
+    "id": "3",
+    "title": "Testing"
+  },
+  "4": {
+    "id": "4",
+    "title": "Done"
+  }
+}
