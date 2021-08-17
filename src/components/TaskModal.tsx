@@ -1,5 +1,6 @@
-import React, { FC, useState } from 'react'
+import React, { FC, KeyboardEvent, useState } from 'react'
 import { Form, Modal, Button } from 'react-bootstrap'
+import styled from 'styled-components'
 import ModalWrap from '../ui/ModalWrap'
 import Comments from './Comments'
 
@@ -44,6 +45,13 @@ const TaskModal: FC<PropsTask> = ({
     genNewTasks(taskId, data, type)
   };
 
+  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+    e.preventDefault()
+    if (e.key === 'Enter') {
+      e.currentTarget.blur()
+    }
+  };
+
 
   return (
     <ModalWrap show={show} handleClose={handleClose}>
@@ -56,6 +64,7 @@ const TaskModal: FC<PropsTask> = ({
           placeholder="Title"
           defaultValue={title}
           onChange={handleOnChangeTitle}
+          onKeyUp={handleKeyPress}
           onBlur={() => { handleOnBlur(taskId, tempTitle, 'title') }}
         />
       </Modal.Header>
@@ -72,11 +81,15 @@ const TaskModal: FC<PropsTask> = ({
           onBlur={() => { handleOnBlur(taskId, tempDescription, 'description') }} />
       </Form>
       <Comments arrComments={arrComments} taskId={taskId} />
-      <div>Author: {author}. Column title: {columnTitle || 'no title'}</div>
+      <Text>Author: {author}. Column title: {columnTitle || 'no title'}</Text>
       <Button onClick={() => { deleteTask(taskId) }}>Delete</Button>
     </ModalWrap>
   )
 }
 
+
+const Text = styled.div`
+overflow-wrap: break-word; 
+`
 
 export default TaskModal

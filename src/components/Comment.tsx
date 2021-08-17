@@ -37,7 +37,7 @@ const Comment: FC<PropComments> = ({ author, text, setComments, commentId }) => 
           {capitalize(author)}
         </Form.Label>
         {!edit
-          ? <div> {text}</div>
+          ? <Text> {text}</Text>
           : <Form.Control
             className="mb-3"
             as="textarea"
@@ -74,6 +74,9 @@ border-radius:5px;
 `
 const WrapButtons = styled.div`
 display: flex;
+`
+const Text = styled.div`
+overflow-wrap: break-word; 
 `
 const Wrap = styled.div`
 margin-bottom:10px;

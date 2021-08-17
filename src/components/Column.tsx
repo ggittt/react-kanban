@@ -1,4 +1,4 @@
-import React, { FC, useState, } from 'react';
+import React, { FC, KeyboardEvent, useState, } from 'react';
 import { CloseButton, Form } from 'react-bootstrap';
 import styled from 'styled-components'
 import { ColumnsType, CommentsType, TasksType } from '../types/types';
@@ -7,9 +7,9 @@ import Task from './Task';
 
 type PropsColumn = {
   title: string
-  setColumns: (a:{}) => void
+  setColumns: (a: {}) => void
   tasks: TasksType
-  setTasks: (a:{}) => void
+  setTasks: (a: {}) => void
   columnId: string
   comments: CommentsType
 }
@@ -38,6 +38,13 @@ const Column: FC<PropsColumn> = ({ title, columnId, setColumns, tasks, setTasks,
     })
   };
 
+  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+    e.preventDefault()
+    if (e.key === 'Enter') {
+      saveTitle(columnId)
+    }
+  };
+
 
   return (
     <Wrap>
@@ -49,12 +56,13 @@ const Column: FC<PropsColumn> = ({ title, columnId, setColumns, tasks, setTasks,
             defaultValue={title}
             type='text'
             autoFocus
+            onKeyUp={handleKeyPress}
             onBlur={() => { saveTitle(columnId) }}
           />
           : <Title onClick={handleClickTitle}>{
             title.length === 0
               ? 'Title'
-              : title}</Title>}
+              : <Text>{title}</Text>}</Title>}
 
         <CloseButton onClick={() => { deleteColumn(columnId) }} />
       </Header>
@@ -72,7 +80,7 @@ const Column: FC<PropsColumn> = ({ title, columnId, setColumns, tasks, setTasks,
                 description={tasks[taskId].description}
                 comments={comments}
               />
-            }return null
+            } return null
           })
         }
 
@@ -108,6 +116,11 @@ flex-direction: row;
 justify-content: space-between;
 padding:3px;
 margin-top:4px;
+`
+const Text = styled.div`
+overflow-wrap: break-word;
+white-space: normal;
+word-break: break-word;
 `
 const ListTasks = styled.div`
 width:270px;

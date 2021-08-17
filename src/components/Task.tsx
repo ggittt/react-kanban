@@ -1,4 +1,4 @@
-import React, { FC,  useMemo, useState } from 'react'
+import React, { FC, useMemo, useState } from 'react'
 import { Form } from 'react-bootstrap'
 import styled from 'styled-components'
 import { CommentInterface, CommentsType, TasksType } from '../types/types'
@@ -27,7 +27,7 @@ const Task: FC<PropsTask> = ({
       comments[commentsId].taskId === taskId && acc.push(comments[commentsId])
     })
     setArrComments(acc)
-  }, [comments,taskId])
+  }, [comments, taskId])
 
 
   const handleOnChange = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,6 +62,7 @@ const Task: FC<PropsTask> = ({
             defaultValue={title}
             placeholder="Title"
             autoFocus
+            as="textarea" rows={1}
           />
             <Icons><i className="bi bi-check-circle"
               onClick={() => { genNewTasks(taskId, tempTitle, 'title') }}></i></Icons></>
@@ -99,34 +100,37 @@ const Task: FC<PropsTask> = ({
 }
 
 const Buttons = styled.div`
-      opacity: 0;
-      `
+opacity: 0;
+`
 const Icons = styled.div`
-      margin-left: 2px;
-      `
+margin-left: 2px;
+`
 const Wrap = styled.div`
-      margin: 4px;
-      width:260px;
-      padding: 8px 5px 8px 5px;
-      box-sizing: border-box;
-      background-color: #fff;
-      border-radius:5px;
-      border: 1px solid var(--border-color);
-      &:hover ${Buttons} {
-        opacity: 1;
-    }
-      `
+margin: 4px;
+width:260px;
+padding: 8px 5px 8px 5px;
+box-sizing: border-box;
+background-color: #fff;
+border-radius:5px;
+border: 1px solid var(--border-color);
+&:hover ${Buttons} {
+  opacity: 1;
+}
+`
 
 const Header = styled.div`
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      padding:5px;
-      `
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+padding:5px;
+`
 const Title = styled.div`
-      margin-top:7px;
-      margin-left:13px;
-      width:100%
+margin-top:7px;
+margin-left:13px;
+width:100%;
+overflow-wrap: break-word;
+white-space: normal;
+word-break: break-word;
  `
 
 

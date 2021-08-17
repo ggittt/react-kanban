@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC,  useState } from 'react'
 import { Button, Form, Row } from 'react-bootstrap'
 import ModalWrap from '../ui/ModalWrap';
 import { validUserName } from '../utils/text';
@@ -23,7 +23,7 @@ const SignUpModal: FC<PropSignUpModal> = ({ show, handleSignUp }) => {
   return (
     <>
       <ModalWrap show={show} >
-        <Form >
+        <Form onSubmit={handleSubmit}>
           <Row className='mb-3'>
             <Form.Group>
               <Form.Control
@@ -34,8 +34,8 @@ const SignUpModal: FC<PropSignUpModal> = ({ show, handleSignUp }) => {
             </Form.Group>
           </Row>
           <Button
-            onClick={handleSubmit}
             disabled={buttonDisabled}
+            type="submit"
             variant='primary'>
             Create
           </Button>
